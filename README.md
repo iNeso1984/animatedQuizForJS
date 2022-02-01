@@ -1,2 +1,3 @@
 # animatedQuizForJS
-A simple animation created with html canvas with a prompt quiz. 
+A simple animation I created with html canvas, CSS, JS, jQuery with a prompt quiz that prints to the screen. 
+
