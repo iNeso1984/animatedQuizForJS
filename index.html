@@ -1,0 +1,369 @@
+<!doctype html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Events with Animation</title>
+
+    <style>
+        body {
+            background-color: black
+        }
+
+        text {
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+
+        #btn1 {
+            background-color: #04AA6D;
+            border: none;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 5px 2px;
+            border-radius: 10px;
+        }
+
+        #btn2 {
+            background-color: #04AA6D;
+            border: none;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 5px 2px;
+            border-radius: 10px;
+        }
+
+
+        header {
+            padding-left: 190px;
+            padding-top: 50px;
+            display: flex;
+        }
+
+        #textBox {
+            display: none;
+            background-color: rgb(168, 234, 250);
+            border-radius: 10px;
+            border-style: ridge;
+            border-width: 8px;
+            border-color: #04AA6D;
+            width: 200px;
+            height: 120px;
+            align-items: center;
+            margin-left: 180px;
+        }
+
+        h1 {
+
+            text-align-last: center;
+        }
+
+        img {
+            display: none;
+            width: 200px;
+            margin-left: 200px;
+            height: 200px;
+        }
+
+        #fancy {
+            color: white;
+            text-align: left;
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <header>
+        <button class="button1" id="btn1">Wake Up!</button>
+
+
+<img src="images/fireworks.png">
+    </header>
+
+
+
+    <div class="container">
+        <h1 id="fancy">Z Z Z Z Z Z Z Z Z Z Z Z Z Z </h1>
+        <div id="textBox">
+
+            <h1 id="userScoreText">
+                Final Score!
+            </h1>
+        </div>
+        <div>
+           
+
+            <canvas id="canvas" width="400" height="600"></canvas>
+
+
+
+
+
+        </div>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+        <script>
+
+            //---------------text animation start------------------------
+
+            const text = document.querySelector("#fancy"); //selected class.
+            const strText = text.textContent; //This is giving the contens of the class selected, so iNess...ect
+            const splitText = strText.split(""); //split is a method.
+            text.textContent = ""; // this stops h1 from repeating.
+
+
+
+            for (let i = 0; i < splitText.length; i++) {
+                text.innerHTML += "<span>" + splitText[i] + "</span>" //each letter is split and span tags are added. 
+
+            }
+
+            let char = 0; //start time
+            let timer = setInterval(onTick, 100); // milliseconds
+
+
+            function onTick() {
+                const span = text.querySelectorAll("span")[char];
+                span.classList.add("fade"); // this is going to add the class fade to each span or letter starting at [char]
+                char++
+                if (char === splitText.length) {
+                    complete(); // function is called here from below. 
+                    return;
+                }
+            }
+
+            function complete() {
+                clearInterval(timer); //clearInterval is a JS method to stop time. 
+                timer = null;
+            }
+            //-------------------end of text animation------
+
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+
+            var eyesSize = 0.5;
+            var mouthSize = 2;
+            // Draw the ellipse (x, y, width and height )
+
+            //face
+            ctx.beginPath();
+            ctx.ellipse(200, 200, 100, 110, Math.PI / 1, 0, 4 * Math.PI);
+
+            ctx.fillStyle = "yellow";
+            ctx.fill();
+
+            //ears
+
+
+            //left eye
+
+            ctx.beginPath();
+            ctx.ellipse(150, 170, 20, eyesSize, Math.PI / 1, 0, 4 * Math.PI);
+            ctx.fillStyle = "beige";
+            ctx.fill();
+            //pupil
+            ctx.beginPath();
+            ctx.ellipse(150, 170, 8, eyesSize, Math.PI / 1, 0, 4 * Math.PI);
+            ctx.fillStyle = "black";
+            ctx.fill();
+            ctx.beginPath();
+            ctx.ellipse(152, 173, 2, 2, Math.PI / 1, 0, 4 * Math.PI);
+            ctx.fillStyle = "beige";
+            ctx.fill();
+            //right eye
+
+            ctx.beginPath();
+            ctx.ellipse(240, 170, 20, eyesSize, Math.PI / 1, 0, 4 * Math.PI);
+            ctx.fillStyle = "beige";
+            ctx.fill();
+            //pupil
+            ctx.beginPath();
+            ctx.ellipse(240, 170, 8, eyesSize, Math.PI / 1, 0, 4 * Math.PI);
+            ctx.fillStyle = "black";
+            ctx.fill();
+            ctx.beginPath();
+            ctx.ellipse(242, 172, 2, 2, Math.PI / 1, 0, 4 * Math.PI);
+            ctx.fillStyle = "beige";
+            ctx.fill();
+
+
+
+            //mouth
+            ctx.beginPath();
+            ctx.ellipse(200, 235, 50, mouthSize, Math.PI / 1, 0, 4 * Math.PI);
+            ctx.fillStyle = "black";
+            ctx.fill();
+
+            //neck
+            ctx.beginPath();
+            ctx.rect(180, 290, 40, 50, Math.PI / 1, 0, 4 * Math.PI);
+
+            ctx.fillStyle = "yellow";
+            ctx.fill();
+            //torso
+            ctx.beginPath();
+            ctx.rect(130, 330, 150, 220, Math.PI / 1, 0, 4 * Math.PI);
+            ctx.fillStyle = "gray";
+            ctx.fill();
+            //left leg
+            ctx.beginPath();
+            ctx.rect(130, 500, 150, 220, Math.PI / 1, 0, 4 * Math.PI);
+            ctx.fillStyle = "brown";
+            ctx.fill();
+            //left Arm
+            ctx.beginPath();
+            ctx.rect(70, 330, 60, 300, Math.PI / 1, 0, 4 * Math.PI);
+            ctx.fillStyle = "blue";
+            ctx.fill();
+            //right arm
+            ctx.beginPath();
+            ctx.rect(270, 330, 60, 300, Math.PI / 1, 0, 4 * Math.PI);
+            ctx.fillStyle = "blue";
+            ctx.fill();
+
+
+            //-----------------------click event--------------------->
+
+
+
+
+            $("#btn1").click(function () {
+                ctx.beginPath();
+                ctx.ellipse(200, 235, 50, 10, Math.PI / 1, 0, 4 * Math.PI);
+                ctx.fillStyle = "black";
+                ctx.fill();
+                //left eye
+
+                ctx.beginPath();
+                ctx.ellipse(150, 170, 20, 10, Math.PI / 1, 0, 4 * Math.PI);
+                ctx.fillStyle = "beige";
+                ctx.fill();
+                //pupil
+                ctx.beginPath();
+                ctx.ellipse(150, 170, 8, 10, Math.PI / 1, 0, 4 * Math.PI);
+                ctx.fillStyle = "black";
+                ctx.fill();
+                ctx.beginPath();
+                ctx.ellipse(152, 173, 2, 2, Math.PI / 1, 0, 4 * Math.PI);
+                ctx.fillStyle = "beige";
+                ctx.fill();
+                //right eye
+
+                ctx.beginPath();
+                ctx.ellipse(240, 170, 20, 10, Math.PI / 1, 0, 4 * Math.PI);
+                ctx.fillStyle = "beige";
+                ctx.fill();
+                //pupil
+                ctx.beginPath();
+                ctx.ellipse(240, 170, 8, 10, Math.PI / 1, 0, 4 * Math.PI);
+                ctx.fillStyle = "black";
+                ctx.fill();
+                ctx.beginPath();
+                ctx.ellipse(242, 172, 2, 2, Math.PI / 1, 0, 4 * Math.PI);
+                ctx.fillStyle = "beige";
+                ctx.fill();
+
+                //----------------------------end of drawing----------------------->
+
+
+
+
+                // var wakeUp = $(".button1").text("Oh Hi! Want to take a quiz?");
+                // $(".button1").click(function () {
+
+                // }
+                // )
+
+
+
+                var question1 = "What is the capital of Florida?";
+                var answer1 = "Tallahassee";
+
+                var question2 = "Who delivered the Iron Curtain speech? (fullname)";
+                var answer2 = "Winston Churchill";
+
+                var question3 = "Who is the god of the sea in ancient Greek Mythology?";
+                var answer3 = "Poseidon";
+
+                var score = 0
+
+                function askQuestion(question, answer) {
+                    var userAnswer = prompt(question);
+                    if (userAnswer.toLowerCase() == answer.toLowerCase()
+                    ) {
+                        alert("That's correct!");
+                        score++;
+
+                    }
+
+                    else {
+                        alert("Incorrect. The answer was " + answer + ".");
+                    }
+                }
+
+                askQuestion(question1, answer1);
+                askQuestion(question2, answer2);
+                askQuestion(question3, answer3);
+
+
+                var finalScore = "You got" + " " + " " + score + " " + "out of 3 right.";
+
+
+                if (score == 3) {
+                    $(".button1").hide();
+                    $("img").show();
+                    finalScore += " " + "Perfect score!";
+
+                }
+                else if (score == 2) {
+
+                    $(".button1").hide();
+                    finalScore += " " + "Good job!";
+                }
+                else if (score == 1) {
+
+                    $(".button1").hide();
+                    finalScore += " " + "Not bad."
+                }
+
+                else {
+
+                    $(".button1").hide();
+                    finalScore += " " + "Umm...You might want to read a book or something."
+                }
+
+                $("#textBox").show();
+                $("#userScoreText").replaceWith(finalScore);
+
+
+
+            });
+
+
+
+
+
+
+
+        </script>
+</body>
+
+</html>
