@@ -13,15 +13,21 @@
     <title>Events with Animation</title>
 
     <style>
+
+
         body {
-            background-color: black
+            background: no-repeat;
+            background-image: url("images/background.png");
+            background-color: black;
+           
+       
         }
 
         text {
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         }
 
-        #btn1 {
+        #btn1  {
             background-color: #04AA6D;
             border: none;
             color: white;
@@ -33,6 +39,21 @@
             margin: 5px 2px;
             border-radius: 10px;
         }
+        
+        #trophy  {
+            background-color: #04AA6D;
+            border: none;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 5px 2px;
+            border-radius: 10px;
+            display:none;
+        }
+        
 
         #btn2 {
             background-color: #04AA6D;
@@ -49,14 +70,14 @@
 
 
         header {
-            padding-left: 190px;
-            padding-top: 50px;
+            padding-left: 50px;
+            padding-top: 10px;
             display: flex;
         }
 
         #textBox {
             display: none;
-            background-color: rgb(168, 234, 250);
+            background-color: rgb(241, 235, 198);
             border-radius: 10px;
             border-style: ridge;
             border-width: 8px;
@@ -64,7 +85,7 @@
             width: 200px;
             height: 120px;
             align-items: center;
-            margin-left: 180px;
+            margin-left: 10px;
         }
 
         h1 {
@@ -74,13 +95,14 @@
 
         img {
             display: none;
-            width: 200px;
-            margin-left: 200px;
-            height: 200px;
+            width: 300px;
+            height: 300px;
+            margin-left: 50px;
+           
         }
 
         #fancy {
-            color: white;
+            color: rgb(19, 18, 18);
             text-align: left;
         }
     </style>
@@ -99,12 +121,16 @@
 
 
     <div class="container">
-        <h1 id="fancy">Z Z Z Z Z Z Z Z Z Z Z Z Z Z </h1>
+        <h1 id="fancy">Z Z Z Z Z Z Z Z Z Z </h1>
         <div id="textBox">
 
             <h1 id="userScoreText">
                 Final Score!
             </h1>
+           
+        </div>
+        <div>
+            <button id="trophy">Click Here!</button>
         </div>
         <div>
            
@@ -245,7 +271,7 @@
 
 
 
-            $("#btn1").click(function () {
+           var eyeMoving = $("#btn1").click(function () {
                 ctx.beginPath();
                 ctx.ellipse(200, 235, 50, 10, Math.PI / 1, 0, 4 * Math.PI);
                 ctx.fillStyle = "black";
@@ -286,13 +312,8 @@
 
 
 
-                // var wakeUp = $(".button1").text("Oh Hi! Want to take a quiz?");
-                // $(".button1").click(function () {
-
-                // }
-                // )
-
-
+                
+              //------------questions looped into function--------->
 
                 var question1 = "What is the capital of Florida?";
                 var answer1 = "Tallahassee";
@@ -304,6 +325,9 @@
                 var answer3 = "Poseidon";
 
                 var score = 0
+
+
+                //--------------loop------------------->
 
                 function askQuestion(question, answer) {
                     var userAnswer = prompt(question);
@@ -324,25 +348,45 @@
                 askQuestion(question3, answer3);
 
 
-                var finalScore = "You got" + " " + " " + score + " " + "out of 3 right.";
-
-
+             var finalScore = "You got" + " " + " " + score + " " + "out of 3 right.";
+   
+    
+             //---------------------results---------------->
+             // 3 out of 3-----continues to second click event---->
                 if (score == 3) {
                     $(".button1").hide();
                     $("img").show();
-                    finalScore += " " + "Perfect score!";
+                    $('img').animate({ width: '300px', height: "300px" }, 3000);
+                    $('img').animate({ width: '0px', height: "0px" }, 1000);
+                    
+                  
+             
+                    finalScore += " " + "Perfect score! You should get like a trophy or something...";
+                  $("#trophy").show();
+                  $("#trophy").click(function () {
+
+                         $("body").css("background-image", "url('images/trophy.png')");
+                         $("button").hide();
+
+                    });
+                    
 
                 }
+
+                //---------2 out of 3------------->
                 else if (score == 2) {
 
                     $(".button1").hide();
-                    finalScore += " " + "Good job!";
+                    finalScore += " " + "Good job, but you should try again!";
                 }
+
+                //------------1 out of 3---------->
                 else if (score == 1) {
 
                     $(".button1").hide();
-                    finalScore += " " + "Not bad."
+                    finalScore += " " + "Not bad. Try again!"
                 }
+                //----------------0 out of 3 -------->
 
                 else {
 
